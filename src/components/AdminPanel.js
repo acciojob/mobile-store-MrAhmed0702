@@ -19,32 +19,42 @@ const AdminPanel = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="admin container">
+    <div className="admin">
       <h2>Admin Panel</h2>
       <ProductForm onAdd={handleAdd} />
 
       <h3>Product List</h3>
-      <div className="row">
-        {products.map((p) => (
-          <div key={p.id} className="col-12">
-            <div className="admin-item">
-              <Link to={`/products/${p.id}`}>
-                <div className="row">
-                  <div className="col-md-8">
-                    <span>{p.name} - ${p.price}</span>
-                  </div>
-                </div>
-              </Link>
-              <button className="float-right" onClick={() => handleDelete(p.id)}>
+
+      {/* Each product should be a direct <a> child for Cypress */}
+      {products.map((p) => (
+        <a key={p.id} href={`/products/${p.id}`}>
+          <div className="row">
+            <div className="col-md-8">
+              <span>{p.name} - ${p.price}</span>
+            </div>
+            <div className="col-md-4">
+              <button
+                className="float-right"
+                onClick={(e) => {
+                  e.preventDefault(); // prevent link navigation
+                  handleDelete(p.id);
+                }}
+              >
                 Delete
               </button>
-              <button className="float-right" onClick={() => setEditingProduct(p)}>
+              <button
+                className="float-right"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setEditingProduct(p);
+                }}
+              >
                 Edit
               </button>
             </div>
           </div>
-        ))}
-      </div>
+        </a>
+      ))}
 
       {editingProduct && (
         <div className="edit-section">
