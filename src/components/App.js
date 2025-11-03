@@ -4,7 +4,7 @@ import { Products } from "../constants/products";
 import ProductList from "./ProductList";
 import ProductDetails from "./ProductDetails";
 import AdminPanel from "./AdminPanel";
-import "./styles.css";
+import "./../styles/App.css";
 
 function App() {
   const [products, setProducts] = useState(Products);
