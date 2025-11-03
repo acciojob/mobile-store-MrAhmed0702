@@ -1,24 +1,30 @@
-import React from "react";
-import "./../styles/App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./home";
-import Header from "./header";
-import Admin from "./admin";
-import Product from "./product";
-import AdminProdcut from "./adminProduct";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Products } from "./data";
+import ProductList from "./components/ProductList";
+import ProductDetails from "./components/ProductDetails";
+import AdminPanel from "./components/AdminPanel";
+import "./styles.css";
 
-const App = () => {
+function App() {
+  const [products, setProducts] = useState(Products);
+
   return (
-    <BrowserRouter>
-      <Header />
+    <Router>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/admin">Admin Panel</Link>
+      </nav>
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/products/:id" element={<Product />} />
-        <Route path="/admin/products/:id" element={<AdminProdcut />} />
+        <Route path="/" element={<ProductList products={products} />} />
+        <Route path="/products/:id" element={<ProductDetails products={products} />} />
+        <Route
+          path="/admin"
+          element={<AdminPanel products={products} setProducts={setProducts} />}
+        />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-};
+}
 
 export default App;
