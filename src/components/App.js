@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Products } from "./data";
-import ProductList from "./components/ProductList";
-import ProductDetails from "./components/ProductDetails";
-import AdminPanel from "./components/AdminPanel";
+import { Products } from "../constants/products";
+import ProductList from "./ProductList";
+import ProductDetails from "./ProductDetails";
+import AdminPanel from "./AdminPanel";
 import "./styles.css";
 
 function App() {
