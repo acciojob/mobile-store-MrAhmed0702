@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ProductForm from "./ProductForm";
 
 const AdminPanel = ({ products, setProducts }) => {
@@ -18,22 +19,32 @@ const AdminPanel = ({ products, setProducts }) => {
   };
 
   return (
-    <div className="admin">
+    <div className="admin container">
       <h2>Admin Panel</h2>
       <ProductForm onAdd={handleAdd} />
 
       <h3>Product List</h3>
-      {products.map((p) => (
-        <div key={p.id} className="admin-item">
-          <span>{p.name} - ${p.price}</span>
-          <button className="float-right" onClick={() => handleDelete(p.id)}>
-            Delete
-          </button>
-          <button className="float-right" onClick={() => setEditingProduct(p)}>
-            Edit
-          </button>
-        </div>
-      ))}
+      <div className="row">
+        {products.map((p) => (
+          <div key={p.id} className="col-12">
+            <div className="admin-item">
+              <Link to={`/products/${p.id}`}>
+                <div className="row">
+                  <div className="col-md-8">
+                    <span>{p.name} - ${p.price}</span>
+                  </div>
+                </div>
+              </Link>
+              <button className="float-right" onClick={() => handleDelete(p.id)}>
+                Delete
+              </button>
+              <button className="float-right" onClick={() => setEditingProduct(p)}>
+                Edit
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {editingProduct && (
         <div className="edit-section">

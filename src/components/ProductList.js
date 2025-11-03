@@ -5,13 +5,22 @@ const ProductList = ({ products }) => {
   return (
     <div className="container">
       <h2>Available Mobiles</h2>
-      <div className="grid">
+      <div className="row">
         {products.map((product) => (
-          <div key={product.id} className="card">
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>${product.price}</p>
-            <Link to={`/products/${product.id}`}>View Details</Link>
+          <div className="col-12" key={product.id}>
+            <div>
+              <Link to={`/products/${product.id}`}>
+                <div className="row">
+                  <div className="col-md-3">
+                    <img src={product.image} alt={product.name} width="150" />
+                  </div>
+                  <div className="col-md-9">
+                    <h3>{product.name}</h3>
+                    <p>${product.price}</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
         ))}
       </div>
